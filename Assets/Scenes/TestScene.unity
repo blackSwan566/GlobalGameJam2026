@@ -613,6 +613,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1114095832695753401, guid: 268f1f7b0bd2b432bb84c388d8c7429e, type: 3}
+      propertyPath: m_Speed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1114095832695753401, guid: 268f1f7b0bd2b432bb84c388d8c7429e, type: 3}
+      propertyPath: avoidancePriority
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 3439119109884977822, guid: 268f1f7b0bd2b432bb84c388d8c7429e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.9
@@ -1247,7 +1255,7 @@ Transform:
   m_GameObject: {fileID: 1662214069463749063}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.78983396, z: 0, w: 0.6133207}
-  m_LocalPosition: {x: 2.8, y: 3.48, z: -0.7}
+  m_LocalPosition: {x: 2.8, y: 2.04, z: -0.7}
   m_LocalScale: {x: 0.10000003, y: 0.1, z: 0.10000003}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1264,7 +1272,6 @@ GameObject:
   - component: {fileID: 313850515109289832}
   - component: {fileID: 7639362475367869172}
   - component: {fileID: 8352484263636753191}
-  - component: {fileID: 8352484263636753193}
   - component: {fileID: 8352484263636753194}
   - component: {fileID: 8352484263636753196}
   - component: {fileID: 8352484263636753195}
@@ -1465,33 +1472,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!54 &8352484263636753193
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1662214069463749063}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 1
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 1
-  m_Constraints: 112
-  m_CollisionDetection: 1
 --- !u!136 &8352484263636753194
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1589,8 +1569,8 @@ CharacterController:
   m_Radius: 2.828857
   m_SlopeLimit: 45
   m_StepOffset: 0.5
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
+  m_SkinWidth: 0.1
+  m_MinMoveDistance: 0
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

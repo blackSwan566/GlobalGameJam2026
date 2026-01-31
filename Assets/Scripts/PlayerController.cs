@@ -2,43 +2,60 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("Komponenten")]
     public CharacterController controller;
+    public GameObject bulletPrefab;
+    public Transform firePoint;
+
+    [Header("Bewegung & Maus")]
     public float speed = 8f;
-    public float gravity = -9.81f;
+    public float gravity = -15f;
+    public float mouseSensitivity = 2f;
 
     private Vector3 velocity;
 
     void Start()
     {
-        if (controller == null)
-            controller = GetComponent<CharacterController>();
+        if (controller == null) controller = GetComponent<CharacterController>();
+
+        // Maus einsperren
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     void Update()
     {
-        // 1. WASD INPUT
-        float x = Input.GetAxis("Horizontal"); // A und D
-        float z = Input.GetAxis("Vertical");   // W und S
+        // 1. DREHUNG (Nur Links/Rechts für den Körper)
+        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
+        transform.Rotate(Vector3.up * mouseX);
 
-        // Richtung berechnen (relativ zur Blickrichtung des Spielers)
+        // 2. AWDS BEWEGUNG
+        float x = Input.GetAxis("Horizontal");
+        float z = Input.GetAxis("Vertical");
+
+        // Wichtig: transform.forward bezieht sich jetzt auf die neue Drehung
         Vector3 move = transform.right * x + transform.forward * z;
-
-        // Laufen ausführen
         controller.Move(move * speed * Time.deltaTime);
 
-        // 2. STABILER BODEN-CHECK
-        // Wenn wir am Boden sind, lassen wir die Schwerkraft nicht ins Unendliche wachsen
+        // 3. SCHWERKRAFT
         if (controller.isGrounded && velocity.y < 0)
         {
-            velocity.y = -2f; // Drückt uns sanft auf den Boden
+            velocity.y = -2f;
         }
         else
         {
-            // Wenn wir in der Luft sind (z.B. über einer Senke), fallen wir normal
             velocity.y += gravity * Time.deltaTime;
         }
 
-        // 3. SCHWERKRAFT AUSFÜHREN
+        velocity.y = Mathf.Clamp(velocity.y, -20f, 10f);
         controller.Move(velocity * Time.deltaTime);
+
+        // 4. SCHIESSEN
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (bulletPrefab != null && firePoint != null)
+            {
+                Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+            }
+        }
     }
 }
