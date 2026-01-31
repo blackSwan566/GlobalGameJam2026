@@ -12,6 +12,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Ava_GEOSG
+    second: {fileID: 2100000, guid: d026bc0023b09384db11e903787a9b08, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: polySurface1Mat
     second: {fileID: 2100000, guid: d026bc0023b09384db11e903787a9b08, type: 2}
   materials:
