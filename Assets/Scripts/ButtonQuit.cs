@@ -7,6 +7,8 @@ public class ButtonQuit : MonoBehaviour
     public void QuitGame()
     {
         Debug.Log("Tschüss!");
+        //Kommentar
         Application.Quit();
     }
 }
+
