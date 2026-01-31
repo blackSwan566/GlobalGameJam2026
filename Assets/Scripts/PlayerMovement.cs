@@ -1,18 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float speed = 5.0f;
+    public float speed = 15f;
+    private Rigidbody rb;
 
-    void Update()
+    void Start()
     {
-        float moveHorizontal = Input.GetAxis("Horizontal");
-        float moveVertical = Input.GetAxis("Vertical");
-
-        Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
-        transform.Translate(movement * speed * Time.deltaTime);
+        rb = GetComponent<Rigidbody>();
     }
+
+    // FixedUpdate ist Pflicht für physikalische Bewegungen!
+    void FixedUpdate()
+    {
+        float moveH = Input.GetAxis("Horizontal");
+        float moveV = Input.GetAxis("Vertical");
+
+        Vector3 movement = new Vector3(moveH, 0, moveV);
+        rb.AddForce(movement * speed);
+    }
+
 }
