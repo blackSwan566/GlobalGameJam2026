@@ -15,7 +15,7 @@ MonoBehaviour:
   prefabs:
   - gameObject: {fileID: 919132149155446097, guid: e537ca127fd69cb4c8e18dafddf3d1e1, type: 3}
     settings:
-      m_Strength: 2
+      m_Strength: 19
       m_RotationRangeMin: {x: 0, y: 0, z: 0}
       m_RotationRangeMax: {x: 0, y: 360, z: 0}
       m_ScaleRangeMin: {x: 1, y: 1, z: 1}
@@ -31,7 +31,7 @@ MonoBehaviour:
     name: Pilz01
   - gameObject: {fileID: 919132149155446097, guid: 13278ef94ecc62644ba50ef68502ff85, type: 3}
     settings:
-      m_Strength: 2
+      m_Strength: 11
       m_RotationRangeMin: {x: 0, y: 0, z: 0}
       m_RotationRangeMax: {x: 0, y: 360, z: 0}
       m_ScaleRangeMin: {x: 1, y: 1, z: 1}
@@ -100,7 +100,7 @@ MonoBehaviour:
       m_RotationRangeMax: {x: 0, y: 360, z: 0}
       m_ScaleRangeMin: {x: 1, y: 1, z: 1}
       m_ScaleRangeMax: {x: 1, y: 1, z: 1}
-      m_UniformScale: {x: 0.5, y: 1}
+      m_UniformScale: {x: 0.5, y: 3}
       m_UniformBool: 1
       m_XRotationBool: 0
       m_YRotationBool: 1
@@ -111,12 +111,12 @@ MonoBehaviour:
     name: Grass
   - gameObject: {fileID: 919132149155446097, guid: 385a6bd193043ed4f9b1316ab54e02e1, type: 3}
     settings:
-      m_Strength: 50
+      m_Strength: 5
       m_RotationRangeMin: {x: 0, y: 0, z: 0}
       m_RotationRangeMax: {x: 360, y: 360, z: 360}
       m_ScaleRangeMin: {x: 1, y: 1, z: 1}
       m_ScaleRangeMax: {x: 1, y: 1, z: 1}
-      m_UniformScale: {x: 10, y: 50}
+      m_UniformScale: {x: 10, y: 40}
       m_UniformBool: 1
       m_XRotationBool: 0
       m_YRotationBool: 1
@@ -127,12 +127,12 @@ MonoBehaviour:
     name: SM_Rocks_01
   - gameObject: {fileID: 919132149155446097, guid: 2a53078c866b86d4b97a6f559a2f97a7, type: 3}
     settings:
-      m_Strength: 50
+      m_Strength: 5
       m_RotationRangeMin: {x: 0, y: 0, z: 0}
-      m_RotationRangeMax: {x: 0, y: 360, z: 0}
+      m_RotationRangeMax: {x: 360, y: 360, z: 360}
       m_ScaleRangeMin: {x: 1, y: 1, z: 1}
       m_ScaleRangeMax: {x: 1, y: 1, z: 1}
-      m_UniformScale: {x: 1, y: 1}
+      m_UniformScale: {x: 10, y: 40}
       m_UniformBool: 1
       m_XRotationBool: 0
       m_YRotationBool: 1
@@ -143,15 +143,15 @@ MonoBehaviour:
     name: SM_Rocks_02
   - gameObject: {fileID: 919132149155446097, guid: a8786147896b041448bcb1e7a8bd43e3, type: 3}
     settings:
-      m_Strength: 50
+      m_Strength: 5
       m_RotationRangeMin: {x: 0, y: 0, z: 0}
-      m_RotationRangeMax: {x: 0, y: 0, z: 0}
+      m_RotationRangeMax: {x: 360, y: 360, z: 360}
       m_ScaleRangeMin: {x: 1, y: 1, z: 1}
       m_ScaleRangeMax: {x: 1, y: 1, z: 1}
-      m_UniformScale: {x: 1, y: 1}
+      m_UniformScale: {x: 10, y: 40}
       m_UniformBool: 1
       m_XRotationBool: 0
-      m_YRotationBool: 0
+      m_YRotationBool: 1
       m_ZRotationBool: 0
       m_XScaleBool: 0
       m_YScaleBool: 0
@@ -159,15 +159,15 @@ MonoBehaviour:
     name: SM_Rocks_03
   - gameObject: {fileID: 919132149155446097, guid: 6ee640ea85dbc6c498c8a42b89e24808, type: 3}
     settings:
-      m_Strength: 50
+      m_Strength: 5
       m_RotationRangeMin: {x: 0, y: 0, z: 0}
-      m_RotationRangeMax: {x: 0, y: 0, z: 0}
+      m_RotationRangeMax: {x: 360, y: 360, z: 360}
       m_ScaleRangeMin: {x: 1, y: 1, z: 1}
       m_ScaleRangeMax: {x: 1, y: 1, z: 1}
-      m_UniformScale: {x: 1, y: 1}
+      m_UniformScale: {x: 10, y: 40}
       m_UniformBool: 1
       m_XRotationBool: 0
-      m_YRotationBool: 0
+      m_YRotationBool: 1
       m_ZRotationBool: 0
       m_XScaleBool: 0
       m_YScaleBool: 0
@@ -175,15 +175,15 @@ MonoBehaviour:
     name: SM_Rocks_04
   - gameObject: {fileID: 919132149155446097, guid: 8d5dba3368f492a4dbca45cdb8055a24, type: 3}
     settings:
-      m_Strength: 50
+      m_Strength: 5
       m_RotationRangeMin: {x: 0, y: 0, z: 0}
-      m_RotationRangeMax: {x: 0, y: 0, z: 0}
+      m_RotationRangeMax: {x: 360, y: 360, z: 360}
       m_ScaleRangeMin: {x: 1, y: 1, z: 1}
       m_ScaleRangeMax: {x: 1, y: 1, z: 1}
-      m_UniformScale: {x: 1, y: 1}
+      m_UniformScale: {x: 10, y: 40}
       m_UniformBool: 1
       m_XRotationBool: 0
-      m_YRotationBool: 0
+      m_YRotationBool: 1
       m_ZRotationBool: 0
       m_XScaleBool: 0
       m_YScaleBool: 0
@@ -191,15 +191,15 @@ MonoBehaviour:
     name: SM_Rocks_05
   - gameObject: {fileID: 919132149155446097, guid: 353e1d06c3cc2624fa1a8667af5fc843, type: 3}
     settings:
-      m_Strength: 50
+      m_Strength: 16.75
       m_RotationRangeMin: {x: 0, y: 0, z: 0}
-      m_RotationRangeMax: {x: 0, y: 0, z: 0}
+      m_RotationRangeMax: {x: 360, y: 360, z: 360}
       m_ScaleRangeMin: {x: 1, y: 1, z: 1}
       m_ScaleRangeMax: {x: 1, y: 1, z: 1}
-      m_UniformScale: {x: 1, y: 1}
+      m_UniformScale: {x: 10, y: 40}
       m_UniformBool: 1
       m_XRotationBool: 0
-      m_YRotationBool: 0
+      m_YRotationBool: 1
       m_ZRotationBool: 0
       m_XScaleBool: 0
       m_YScaleBool: 0
@@ -207,15 +207,15 @@ MonoBehaviour:
     name: SM_Rocks_06
   - gameObject: {fileID: 919132149155446097, guid: 44b6f8dca43ca32438ee7462382b361e, type: 3}
     settings:
-      m_Strength: 50
+      m_Strength: 5
       m_RotationRangeMin: {x: 0, y: 0, z: 0}
-      m_RotationRangeMax: {x: 0, y: 0, z: 0}
+      m_RotationRangeMax: {x: 360, y: 360, z: 360}
       m_ScaleRangeMin: {x: 1, y: 1, z: 1}
       m_ScaleRangeMax: {x: 1, y: 1, z: 1}
-      m_UniformScale: {x: 1, y: 1}
+      m_UniformScale: {x: 10, y: 40}
       m_UniformBool: 1
       m_XRotationBool: 0
-      m_YRotationBool: 0
+      m_YRotationBool: 1
       m_ZRotationBool: 0
       m_XScaleBool: 0
       m_YScaleBool: 0
@@ -223,15 +223,15 @@ MonoBehaviour:
     name: SM_Rocks_07
   - gameObject: {fileID: 919132149155446097, guid: 9989c43d91cf6884cbb45741c40c905c, type: 3}
     settings:
-      m_Strength: 50
+      m_Strength: 5
       m_RotationRangeMin: {x: 0, y: 0, z: 0}
-      m_RotationRangeMax: {x: 0, y: 0, z: 0}
+      m_RotationRangeMax: {x: 360, y: 360, z: 360}
       m_ScaleRangeMin: {x: 1, y: 1, z: 1}
       m_ScaleRangeMax: {x: 1, y: 1, z: 1}
-      m_UniformScale: {x: 1, y: 1}
+      m_UniformScale: {x: 10, y: 40}
       m_UniformBool: 1
       m_XRotationBool: 0
-      m_YRotationBool: 0
+      m_YRotationBool: 1
       m_ZRotationBool: 0
       m_XScaleBool: 0
       m_YScaleBool: 0
@@ -239,15 +239,15 @@ MonoBehaviour:
     name: SM_Rocks_08
   - gameObject: {fileID: 919132149155446097, guid: aabf8ff48bb5b5d49b4e9a800dc3c966, type: 3}
     settings:
-      m_Strength: 50
+      m_Strength: 5
       m_RotationRangeMin: {x: 0, y: 0, z: 0}
-      m_RotationRangeMax: {x: 0, y: 0, z: 0}
+      m_RotationRangeMax: {x: 360, y: 360, z: 360}
       m_ScaleRangeMin: {x: 1, y: 1, z: 1}
       m_ScaleRangeMax: {x: 1, y: 1, z: 1}
-      m_UniformScale: {x: 1, y: 1}
+      m_UniformScale: {x: 10, y: 40}
       m_UniformBool: 1
       m_XRotationBool: 0
-      m_YRotationBool: 0
+      m_YRotationBool: 1
       m_ZRotationBool: 0
       m_XScaleBool: 0
       m_YScaleBool: 0
@@ -255,15 +255,15 @@ MonoBehaviour:
     name: SM_Rocks_09
   - gameObject: {fileID: 919132149155446097, guid: a1e8cf771d0bb1543a7305c42e8f3a02, type: 3}
     settings:
-      m_Strength: 50
+      m_Strength: 5
       m_RotationRangeMin: {x: 0, y: 0, z: 0}
-      m_RotationRangeMax: {x: 0, y: 0, z: 0}
+      m_RotationRangeMax: {x: 360, y: 360, z: 360}
       m_ScaleRangeMin: {x: 1, y: 1, z: 1}
       m_ScaleRangeMax: {x: 1, y: 1, z: 1}
-      m_UniformScale: {x: 1, y: 1}
+      m_UniformScale: {x: 10, y: 40}
       m_UniformBool: 1
       m_XRotationBool: 0
-      m_YRotationBool: 0
+      m_YRotationBool: 1
       m_ZRotationBool: 0
       m_XScaleBool: 0
       m_YScaleBool: 0
@@ -271,15 +271,15 @@ MonoBehaviour:
     name: SM_Rocks_10
   - gameObject: {fileID: 919132149155446097, guid: 31872de0209ebce4e91e464b79c523e3, type: 3}
     settings:
-      m_Strength: 50
+      m_Strength: 5
       m_RotationRangeMin: {x: 0, y: 0, z: 0}
-      m_RotationRangeMax: {x: 0, y: 0, z: 0}
+      m_RotationRangeMax: {x: 360, y: 360, z: 360}
       m_ScaleRangeMin: {x: 1, y: 1, z: 1}
       m_ScaleRangeMax: {x: 1, y: 1, z: 1}
-      m_UniformScale: {x: 1, y: 1}
+      m_UniformScale: {x: 10, y: 40}
       m_UniformBool: 1
       m_XRotationBool: 0
-      m_YRotationBool: 0
+      m_YRotationBool: 1
       m_ZRotationBool: 0
       m_XScaleBool: 0
       m_YScaleBool: 0
