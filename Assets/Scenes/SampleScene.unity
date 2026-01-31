@@ -387,7 +387,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bb4fd15c94cc4c25a2b23cd410bca81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 250
+  speed: 50
 --- !u!54 &129419224
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1753,8 +1753,8 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!65 &5635498391135241848
-BoxCollider:
+--- !u!64 &5635498391135241848
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1771,9 +1771,10 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 239.8437, y: 32.12813, z: 189.79482}
-  m_Center: {x: 104.36884, y: 1.3417424, z: -47.372524}
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -2432090755550338912, guid: d0bd9221ee413a448968450903f40570, type: 3}
 --- !u!1001 &7131479449723840178
 PrefabInstance:
   m_ObjectHideFlags: 0
