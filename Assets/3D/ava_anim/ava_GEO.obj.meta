@@ -3,7 +3,22 @@ guid: cd3fbd30af5a24f4f82a5db1fabfb225
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ava_GEOMat
+    second: {fileID: 2100000, guid: d026bc0023b09384db11e903787a9b08, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ava_GEOSG
+    second: {fileID: 2100000, guid: d026bc0023b09384db11e903787a9b08, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: polySurface1Mat
+    second: {fileID: 2100000, guid: d026bc0023b09384db11e903787a9b08, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
