@@ -1,10 +1,12 @@
 using UnityEngine;
+using UnityEngine.AI; // WICHTIG: Damit NavMesh erkannt wird
 
 public class EnemySpawner : MonoBehaviour
 {
-    public GameObject enemyPrefab; // Hier ziehst du dein blaues Prefab rein
-    public int numberOfEnemies = 10; // Wie viele Gegner sollen erscheinen?
-    public float spawnRange = 20f;   // Bereich, in dem sie verteilt werden
+    public GameObject enemyPrefab;    // Dein Gegner-Prefab
+    public Transform playerTransform; // Dein Player aus der Hierarchy
+    public int numberOfEnemies = 10;   // Anzahl der Gegner
+    public float spawnRange = 20f;      // Radius
 
     void Start()
     {
@@ -15,15 +17,25 @@ public class EnemySpawner : MonoBehaviour
     {
         for (int i = 0; i < numberOfEnemies; i++)
         {
-            // Erzeuge eine zufällige Position auf dem Boden (Y bleibt 0.5 oder 1)
+            // 1. Zufällige Position berechnen
             Vector3 randomPos = new Vector3(
                 Random.Range(-spawnRange, spawnRange),
                 0.5f,
                 Random.Range(-spawnRange, spawnRange)
-            );
+            ) + transform.position;
 
-            // Der magische Befehl: Erstelle eine Kopie des Prefabs an dieser Stelle
-            Instantiate(enemyPrefab, randomPos, Quaternion.identity);
+            // 2. Den Gegner erstellen und in einer Variable speichern
+            GameObject newEnemy = Instantiate(enemyPrefab, randomPos, Quaternion.identity);
+
+            // 3. Dem neuen Gegner sagen, wer der Player ist
+            EnemyAI ai = newEnemy.GetComponent<EnemyAI>();
+            if (ai != null)
+            {
+                ai.player = playerTransform;
+            }
         }
     }
 }
+
+
+    

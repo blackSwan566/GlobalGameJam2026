@@ -11,7 +11,7 @@ public class CharacterStats : MonoBehaviour
         if (isDead) return;
 
         health -= damage;
-        anim.SetTrigger("Hit"); // Spielt die "Hit" Animation ab
+        anim.SetTrigger("Hit");
 
         if (health <= 0)
         {
@@ -21,13 +21,24 @@ public class CharacterStats : MonoBehaviour
 
     void Die()
     {
+        if (isDead) return; // Sicherheitshalber, damit Die() nur einmal läuft
         isDead = true;
-        anim.SetBool("Die", true); // Spielt die "Die" Animation ab
 
-        // Verhindert, dass die KI oder der Player sich weiter bewegt
+        anim.SetBool("Die", true);
+
+        // 1. Bewegung stoppen (KI)
         if (GetComponent<UnityEngine.AI.NavMeshAgent>())
             GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
+
+        // 2. Bewegung stoppen (Player)
         if (GetComponent<CharacterController>())
             GetComponent<CharacterController>().enabled = false;
+
+        // 3. WICHTIG: Wenn es ein Gegner ist, nach 5 Sekunden löschen
+        // Das hält deine Szene sauber, wenn du viele Gegner spawnst
+        if (gameObject.CompareTag("Enemy"))
+        {
+            Destroy(gameObject, 5f);
+        }
     }
 }
