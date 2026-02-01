@@ -9,13 +9,13 @@ public class CharacterStats : MonoBehaviour
     public bool isDead = false;
     public bool isAggressive = false;
 
+
     public void TakeDamage(int damage)
     {
         if (isDead) return;
 
         lifes -= damage;
-        countShoot++; // WICHTIG: Erhöht den Zähler bei jedem Treffer
-
+        
         // Debug-Ausgabe in der Konsole zur Kontrolle
         Debug.Log(gameObject.name + " getroffen! Leben: " + lifes + " | Schüsse: " + countShoot);
 
@@ -31,10 +31,7 @@ public class CharacterStats : MonoBehaviour
             Die();
         }
 
-        if (countShoot >= 5)
-        {
-            ShootCount();
-        }
+        
     }
 
     void Die()
@@ -42,7 +39,7 @@ public class CharacterStats : MonoBehaviour
         if (isDead) return;
         isDead = true;
 
-        Debug.Log(gameObject.name + " ist gestorben!");
+        Debug.Log(gameObject.name + " TOOOOT!");
 
         if (anim != null) anim.SetBool("Die", true);
 
@@ -52,27 +49,20 @@ public class CharacterStats : MonoBehaviour
 
         // Das Objekt nach einer kurzen Verzögerung (für die Animation) deaktivieren
         Invoke("DeactivateObject", 0.5f);
+
+
+        
     }
 
     void DeactivateObject()
     {
         gameObject.SetActive(false);
-    }
-
-    void ShootCount()
-    {
-        if (isAggressive) return;
-        isAggressive = true;
-
-        Debug.Log(gameObject.name + " wird aggressiv!");
-        if (anim != null) anim.SetBool("Shoot", true);
-
-        // Aggressives Verhalten: Gegner wird schneller statt anzuhalten
-        NavMeshAgent agent = GetComponent<NavMeshAgent>();
-        if (agent != null)
+        countShoot++;
+        if (countShoot >= 5)
         {
-            agent.speed *= 2; // Verdoppelt das Tempo
-            agent.angularSpeed *= 2; // Dreht sich schneller
+            isAggressive = true;
         }
+
     }
+
 }

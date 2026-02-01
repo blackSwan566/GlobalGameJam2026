@@ -17,17 +17,14 @@ public class Bullet : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        // Wir prüfen, ob das getroffene Objekt ein Gegner ist
         if (other.CompareTag("Enemy"))
         {
-            // Wir holen uns die Stats, um Leben abzuziehen und Treffer zu zählen
             CharacterStats stats = other.GetComponent<CharacterStats>();
             if (stats != null)
             {
-                stats.TakeDamage(1); // Hier wird jetzt alles korrekt verarbeitet
+                // Wir senden den Schaden an die Stats
+                stats.TakeDamage(1);
             }
-
-            // Die Kugel verschwindet beim Aufprall
             Destroy(gameObject);
         }
     }
