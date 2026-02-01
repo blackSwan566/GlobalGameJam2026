@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
 
         // 2. WASD BEWEGUNG
         float x = Input.GetAxis("Horizontal"); // A/D
-        float z = Input.GetAxis("Vertical");   // W/S
+         float z = Input.GetAxis("Vertical");   // W/S
      
 
         // Bewegung relativ zur Blickrichtung des Players
