@@ -8,6 +8,8 @@ public class EnemyAI : MonoBehaviour
     public Animator anim;
     private bool isDead = false;
 
+    public GameObject Mask, MasksShattered;
+
 
 
     [Header("Damage")]
@@ -90,5 +92,8 @@ public class EnemyAI : MonoBehaviour
 
         if (agent != null) agent.isStopped = true;
         gameObject.SetActive(false);
+
+        Mask.SetActive(false);
+        MasksShattered.SetActive(true);
     }
 }
