@@ -89,10 +89,23 @@ public class EnemyAI : MonoBehaviour
         if (isDead) return;
         isDead = true;
 
+        // KI stoppen, damit der Gegner nicht tot weiterläuft
         if (agent != null) agent.isStopped = true;
-        gameObject.SetActive(false);
 
-        Mask.SetActive(false);
-        MasksShattered.SetActive(true);
+        // Visuelle Effekte (Maske aus, Splitter an)
+        if (Mask != null) Mask.SetActive(false);
+        if (MasksShattered != null) MasksShattered.SetActive(true);
+
+        // Starte den Timer für das Verschwinden
+        StartCoroutine(DeactivateAfterDelay(5f));
+    }
+
+    private System.Collections.IEnumerator DeactivateAfterDelay(float delay)
+    {
+        // Warte die angegebene Zeit (5 Sekunden)
+        yield return new WaitForSeconds(delay);
+
+        // Erst jetzt wird das Objekt komplett deaktiviert
+        gameObject.SetActive(false);
     }
 }

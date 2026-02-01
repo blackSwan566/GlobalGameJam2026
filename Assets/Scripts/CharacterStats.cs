@@ -39,7 +39,7 @@ public class CharacterStats : MonoBehaviour
         if (isDead) return;
         isDead = true;
 
-        Debug.Log(gameObject.name + " TOOOOT!");
+        Debug.Log(gameObject.name + " ist gestorben!");
 
         if (anim != null) anim.SetBool("Die", true);
 
@@ -49,7 +49,6 @@ public class CharacterStats : MonoBehaviour
 
         // Das Objekt nach einer kurzen Verzögerung (für die Animation) deaktivieren
         Invoke("DeactivateObject", 0.5f);
-
 
         
     }
