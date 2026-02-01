@@ -1,41 +1,52 @@
 using UnityEngine;
-using UnityEngine.AI; // WICHTIG: Damit NavMesh erkannt wird
+using UnityEngine.AI;
+using System.Collections; // Wichtig!
 
 public class EnemySpawner : MonoBehaviour
 {
-    public GameObject enemyPrefab;    // Dein Gegner-Prefab
-    public Transform playerTransform; // Dein Player aus der Hierarchy
-    public int numberOfEnemies = 10;   // Anzahl der Gegner
-    public float spawnRange = 20f;      // Radius
+    public GameObject enemyPrefab;
+    public Transform playerTransform;
+    public int numberOfEnemies = 10;
+    public float spawnRange = 20f;
+
+    [Header("Spawn Einstellungen")]
+    public float spawnDelay = 1.5f; // Zeit zwischen den Spawns
 
     void Start()
     {
-        SpawnEnemies();
+        // Sicherstellen, dass die Coroutine nur einmal gestartet wird
+        StopAllCoroutines();
+        StartCoroutine(SpawnEnemiesRoutine());
     }
 
-    void SpawnEnemies()
+    IEnumerator SpawnEnemiesRoutine()
     {
+        // 1. Einen winzigen Moment warten, damit nicht alles im ersten Frame passiert
+        yield return null;
+
         for (int i = 0; i < numberOfEnemies; i++)
         {
-            // 1. Zufällige Position berechnen
+            // Position berechnen
             Vector3 randomPos = new Vector3(
                 Random.Range(-spawnRange, spawnRange),
                 0.5f,
                 Random.Range(-spawnRange, spawnRange)
             ) + transform.position;
 
-            // 2. Den Gegner erstellen und in einer Variable speichern
+            // Gegner instanziieren
             GameObject newEnemy = Instantiate(enemyPrefab, randomPos, Quaternion.identity);
 
-            // 3. Dem neuen Gegner sagen, wer der Player ist
+            // AI Ziel zuweisen
             EnemyAI ai = newEnemy.GetComponent<EnemyAI>();
             if (ai != null)
             {
                 ai.player = playerTransform;
             }
+
+            Debug.Log("Gegner " + (i + 1) + " gespawnt. Warte " + spawnDelay + " Sekunden...");
+
+            // WARTEN: Das ist die entscheidende Zeile
+            yield return new WaitForSeconds(spawnDelay);
         }
     }
 }
-
-
-    
