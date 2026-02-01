@@ -24,10 +24,6 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        // 1. DREHUNG (Nur Links/Rechts für den Körper)
-        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
-        transform.Rotate(Vector3.up * mouseX);
-
         // 2. AWDS BEWEGUNG
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
