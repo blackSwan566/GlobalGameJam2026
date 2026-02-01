@@ -15,7 +15,7 @@ MonoBehaviour:
   prefabs:
   - gameObject: {fileID: 919132149155446097, guid: e537ca127fd69cb4c8e18dafddf3d1e1, type: 3}
     settings:
-      m_Strength: 19
+      m_Strength: 3.25
       m_RotationRangeMin: {x: 0, y: 0, z: 0}
       m_RotationRangeMax: {x: 0, y: 360, z: 0}
       m_ScaleRangeMin: {x: 1, y: 1, z: 1}
@@ -31,7 +31,7 @@ MonoBehaviour:
     name: Pilz01
   - gameObject: {fileID: 919132149155446097, guid: 13278ef94ecc62644ba50ef68502ff85, type: 3}
     settings:
-      m_Strength: 11
+      m_Strength: 1
       m_RotationRangeMin: {x: 0, y: 0, z: 0}
       m_RotationRangeMax: {x: 0, y: 360, z: 0}
       m_ScaleRangeMin: {x: 1, y: 1, z: 1}
@@ -47,7 +47,7 @@ MonoBehaviour:
     name: Pilz02
   - gameObject: {fileID: 919132149155446097, guid: e863bbbf5d95a9f41994d44c07697936, type: 3}
     settings:
-      m_Strength: 2
+      m_Strength: 10
       m_RotationRangeMin: {x: 0, y: 0, z: 0}
       m_RotationRangeMax: {x: 0, y: 360, z: 0}
       m_ScaleRangeMin: {x: 1, y: 1, z: 1}
@@ -63,7 +63,7 @@ MonoBehaviour:
     name: Pilz03
   - gameObject: {fileID: 919132149155446097, guid: e0788e96bf1b81748bb69c7e94afc7d4, type: 3}
     settings:
-      m_Strength: 12.25
+      m_Strength: 100
       m_RotationRangeMin: {x: 0, y: 0, z: 0}
       m_RotationRangeMax: {x: 0, y: 360, z: 0}
       m_ScaleRangeMin: {x: 1, y: 1, z: 1}
@@ -79,7 +79,7 @@ MonoBehaviour:
     name: tree01
   - gameObject: {fileID: 919132149155446097, guid: 40d74fc74a99db148b761e43088afd4d, type: 3}
     settings:
-      m_Strength: 5
+      m_Strength: 100
       m_RotationRangeMin: {x: 0, y: 0, z: 0}
       m_RotationRangeMax: {x: 0, y: 360, z: 0}
       m_ScaleRangeMin: {x: 1, y: 1, z: 1}
