@@ -23,7 +23,6 @@ public class EnemyAI : MonoBehaviour
         if (agent == null) agent = GetComponent<NavMeshAgent>();
         if (anim == null) anim = GetComponent<Animator>();
 
-        // NATÜRLICHES VERHALTEN: Zufällige Werte für jeden Gegner
         agent.speed = Random.Range(3f, 7f);          // Unterschiedliches Tempo
         agent.acceleration = Random.Range(4f, 10f);  // Unterschiedliches Anlaufen
         agent.stoppingDistance = Random.Range(1.5f, 4f); // Halten in unterschiedlichem Abstand an
