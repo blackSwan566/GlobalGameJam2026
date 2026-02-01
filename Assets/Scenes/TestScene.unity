@@ -228,8 +228,8 @@ MonoBehaviour:
   m_StreamingVersion: 20170927
   m_Priority: 10
   m_StandbyUpdate: 2
-  m_LookAt: {fileID: 0}
-  m_Follow: {fileID: 0}
+  m_LookAt: {fileID: 313850515109289832}
+  m_Follow: {fileID: 313850515109289832}
   m_Lens:
     FieldOfView: 16.3
     OrthographicSize: 5
@@ -257,14 +257,45 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 128325150}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.12278779, y: 0.6963643, z: -0.12278779, w: 0.6963643}
-  m_LocalPosition: {x: -46.671917, y: -271.2747, z: 79.03607}
+  m_LocalRotation: {x: -0.007962042, y: 0.9901594, z: -0.06329256, w: -0.124559514}
+  m_LocalPosition: {x: 21.256401, y: -289.63467, z: 138.41006}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 303648833}
   m_Father: {fileID: 69891955}
-  m_LocalEulerAnglesHint: {x: 20, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 6.9, y: 194.34, z: 0}
+--- !u!1 &165541043
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 165541044}
+  m_Layer: 0
+  m_Name: Firepoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &165541044
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 165541043}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5.2, y: 7.5, z: 6.9}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 313850515109289832}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &292822052
 GameObject:
   m_ObjectHideFlags: 0
@@ -439,7 +470,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 1
-  m_FollowOffset: {x: -59.5, y: 20, z: 0}
+  m_FollowOffset: {x: -63.1, y: 8.1, z: 0}
   m_XDamping: 0
   m_YDamping: 1
   m_ZDamping: 1
@@ -623,15 +654,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3439119109884977822, guid: 268f1f7b0bd2b432bb84c388d8c7429e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.9
+      value: 73.3
       objectReference: {fileID: 0}
     - target: {fileID: 3439119109884977822, guid: 268f1f7b0bd2b432bb84c388d8c7429e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.93
+      value: 2.69
       objectReference: {fileID: 0}
     - target: {fileID: 3439119109884977822, guid: 268f1f7b0bd2b432bb84c388d8c7429e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3.51
+      value: -45.7
       objectReference: {fileID: 0}
     - target: {fileID: 3439119109884977822, guid: 268f1f7b0bd2b432bb84c388d8c7429e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -664,6 +695,10 @@ PrefabInstance:
     - target: {fileID: 4029981889990398990, guid: 268f1f7b0bd2b432bb84c388d8c7429e, type: 3}
       propertyPath: m_Name
       value: BunnyMan_New
+      objectReference: {fileID: 0}
+    - target: {fileID: 4029981889990398990, guid: 268f1f7b0bd2b432bb84c388d8c7429e, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 6821357648235022695, guid: 268f1f7b0bd2b432bb84c388d8c7429e, type: 3}
       propertyPath: player
@@ -761,8 +796,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.12278779, y: 0.6963643, z: -0.12278779, w: 0.6963643}
-  m_LocalPosition: {x: -46.671917, y: -271.2747, z: 79.03607}
+  m_LocalRotation: {x: -0.007962041, y: 0.9901594, z: -0.06329254, w: -0.124559514}
+  m_LocalPosition: {x: 21.256401, y: -289.63467, z: 138.41006}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1080,7 +1115,7 @@ MonoBehaviour:
   enemyPrefab: {fileID: 1836278}
   playerTransform: {fileID: 313850515109289832}
   numberOfEnemies: 10
-  spawnRange: 5
+  spawnRange: 10
 --- !u!4 &1438009832
 Transform:
   m_ObjectHideFlags: 0
@@ -1090,55 +1125,7 @@ Transform:
   m_GameObject: {fileID: 1438009830}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: 8}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1687129301
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1687129303}
-  - component: {fileID: 1687129302}
-  m_Layer: 0
-  m_Name: GameManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1687129302
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1687129301}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd8ddfcabbf574e61a878ad50316acef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  life: 5
-  score: 0
-  counter: 0
-  scoreText: {fileID: 1288128996}
---- !u!4 &1687129303
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1687129301}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: 8}
+  m_LocalPosition: {x: 65.5, y: -3.7, z: -53.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1258,7 +1245,8 @@ Transform:
   m_LocalPosition: {x: 2.8, y: 2.04, z: -0.7}
   m_LocalScale: {x: 0.10000003, y: 0.1, z: 0.10000003}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 165541044}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 104.34, z: 0}
 --- !u!1 &1662214069463749063
@@ -1508,8 +1496,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 8352484263636753198}
+  bulletPrefab: {fileID: 6449132233768545323, guid: 1535aced1d41b4532a82153606103c4e, type: 3}
+  firePoint: {fileID: 165541044}
   speed: 12
   gravity: -9.45
+  mouseSensitivity: 2
 --- !u!114 &8352484263636753196
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1522,9 +1513,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fa11fe2446c14391844116d59ad2f30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  lifes: 5
+  countShoot: 0
   anim: {fileID: 8352484263636753197}
   isDead: 0
+  isAggressive: 0
 --- !u!95 &8352484263636753197
 Animator:
   serializedVersion: 5
@@ -1581,7 +1574,6 @@ SceneRoots:
   - {fileID: 1438009832}
   - {fileID: 6851314}
   - {fileID: 1134485304}
-  - {fileID: 1687129303}
   - {fileID: 1996106140}
   - {fileID: 313850515109289832}
   - {fileID: 849757573}

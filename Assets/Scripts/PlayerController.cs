@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [Header("Komponenten")]
+
     public CharacterController controller;
     public GameObject bulletPrefab;
     public Transform firePoint;
 
-    [Header("Bewegung & Maus")]
+
     public float speed = 8f;
     public float gravity = -15f;
     public float mouseSensitivity = 2f;
