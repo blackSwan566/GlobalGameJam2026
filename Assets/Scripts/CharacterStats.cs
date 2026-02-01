@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class CharacterStats : MonoBehaviour
 {
@@ -8,15 +9,22 @@ public class CharacterStats : MonoBehaviour
     public bool isDead = false;
     public bool isAggressive = false;
 
-
     public void TakeDamage(int damage)
     {
         if (isDead) return;
 
         lifes -= damage;
-        
-        anim.SetTrigger("Hit");
-        anim.SetTrigger("TakeMask");
+        countShoot++; // WICHTIG: Erhöht den Zähler bei jedem Treffer
+
+        // Debug-Ausgabe in der Konsole zur Kontrolle
+        Debug.Log(gameObject.name + " getroffen! Leben: " + lifes + " | Schüsse: " + countShoot);
+
+        // Animationen abspielen (sofern vorhanden)
+        if (anim != null)
+        {
+            anim.SetTrigger("Hit");
+            anim.SetTrigger("TakeMask");
+        }
 
         if (lifes <= 0)
         {
@@ -31,42 +39,40 @@ public class CharacterStats : MonoBehaviour
 
     void Die()
     {
-        if (isDead) return; // Sicherheitshalber, damit Die() nur einmal läuft
+        if (isDead) return;
         isDead = true;
 
-        anim.SetBool("Die", true);
+        Debug.Log(gameObject.name + " ist gestorben!");
 
-        // 1. Bewegung stoppen (KI)
-        if (GetComponent<UnityEngine.AI.NavMeshAgent>())
-            GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
+        if (anim != null) anim.SetBool("Die", true);
 
-        // 2. Bewegung stoppen (Player)
-        if (GetComponent<CharacterController>())
-            GetComponent<CharacterController>().enabled = false;
+        // KI stoppen
+        NavMeshAgent agent = GetComponent<NavMeshAgent>();
+        if (agent != null) agent.isStopped = true;
 
-        // 3. WICHTIG: Wenn es ein Gegner ist, nach 5 Sekunden löschen
-        // Das hält deine Szene sauber, wenn du viele Gegner spawnst
-        if (gameObject.CompareTag("Enemy"))
-        {
-            Destroy(gameObject, 5f);
-            Debug.Log("Enemy destroyed");
-        }
+        // Das Objekt nach einer kurzen Verzögerung (für die Animation) deaktivieren
+        Invoke("DeactivateObject", 0.5f);
+    }
+
+    void DeactivateObject()
+    {
+        gameObject.SetActive(false);
     }
 
     void ShootCount()
     {
         if (isAggressive) return;
+        isAggressive = true;
 
-        anim.SetBool("Shoot", true);
+        Debug.Log(gameObject.name + " wird aggressiv!");
+        if (anim != null) anim.SetBool("Shoot", true);
 
-        // 1. Bewegung stoppen (KI)
-        if (GetComponent<UnityEngine.AI.NavMeshAgent>())
-            GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
-
-        // 2. Bewegung stoppen (Player)
-        if (GetComponent<CharacterController>())
-            GetComponent<CharacterController>().enabled = false;
-
-        Debug.Log("Character is aggressive maaaaan");
+        // Aggressives Verhalten: Gegner wird schneller statt anzuhalten
+        NavMeshAgent agent = GetComponent<NavMeshAgent>();
+        if (agent != null)
+        {
+            agent.speed *= 2; // Verdoppelt das Tempo
+            agent.angularSpeed *= 2; // Dreht sich schneller
+        }
     }
 }

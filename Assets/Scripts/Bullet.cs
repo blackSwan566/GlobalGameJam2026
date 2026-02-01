@@ -17,13 +17,17 @@ public class Bullet : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        // Wir prüfen, ob das getroffene Objekt ein Gegner ist
         if (other.CompareTag("Enemy"))
         {
-            EnemyAI enemy = other.GetComponent<EnemyAI>();
-            if (enemy != null)
+            // Wir holen uns die Stats, um Leben abzuziehen und Treffer zu zählen
+            CharacterStats stats = other.GetComponent<CharacterStats>();
+            if (stats != null)
             {
-                enemy.Die(); // Ruft die neue Sterbe-Logik auf
+                stats.TakeDamage(1); // Hier wird jetzt alles korrekt verarbeitet
             }
+
+            // Die Kugel verschwindet beim Aufprall
             Destroy(gameObject);
         }
     }
