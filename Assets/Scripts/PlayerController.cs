@@ -2,56 +2,40 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-
+   // [Header("Bewegung")]
+    public float speed = 5f;
     public CharacterController controller;
-    public GameObject bulletPrefab;
-    public Transform firePoint;
 
-
-    public float speed = 8f;
-    public float gravity = -15f;
-    public float mouseSensitivity = 2f;
-
-    private Vector3 velocity;
+   // [Header("Maus-Steuerung")]
+    public float mouseSensitivity = 100f;
 
     void Start()
     {
-        if (controller == null) controller = GetComponent<CharacterController>();
-
-        // Maus einsperren
+        // Sperrt die Maus in der Mitte, damit sie beim Drehen nicht aus dem Fenster rutscht
         Cursor.lockState = CursorLockMode.Locked;
     }
 
     void Update()
     {
-        // 2. AWDS BEWEGUNG
+        // 1. MAUS-ROTATION (Nur Links/Rechts)
+        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
+
+        // Dreht das ganze GameObject um die eigene Achse
+        transform.Rotate(Vector3.up * mouseX);
+
+
+        // 2. BEWEGUNG
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
 
-        // Wichtig: transform.forward bezieht sich jetzt auf die neue Drehung
+        // Die Bewegung erfolgt jetzt immer relativ zur Blickrichtung des Players
         Vector3 move = transform.right * x + transform.forward * z;
         controller.Move(move * speed * Time.deltaTime);
-
-        // 3. SCHWERKRAFT
-        if (controller.isGrounded && velocity.y < 0)
+        
+        // 3. SCHIEẞEN
+        if (Input.GetButtonDown("Fire1"))
         {
-            velocity.y = -2f;
-        }
-        else
-        {
-            velocity.y += gravity * Time.deltaTime;
-        }
-
-        velocity.y = Mathf.Clamp(velocity.y, -20f, 10f);
-        controller.Move(velocity * Time.deltaTime);
-
-        // 4. SCHIESSEN
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (bulletPrefab != null && firePoint != null)
-            {
-                Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-            }
+            // Hier bleibt dein bestehender Shoot-Code
         }
     }
 }
