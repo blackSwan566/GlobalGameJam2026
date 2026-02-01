@@ -1,5 +1,7 @@
+using System.Reflection;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class CharacterStats : MonoBehaviour
 {
@@ -9,13 +11,14 @@ public class CharacterStats : MonoBehaviour
     public bool isDead = false;
     public bool isAggressive = false;
 
-
     public void TakeDamage(int damage)
     {
         if (isDead) return;
 
         lifes -= damage;
-        
+
+
+
         // Debug-Ausgabe in der Konsole zur Kontrolle
         Debug.Log(gameObject.name + " getroffen! Leben: " + lifes + " | Schüsse: " + countShoot);
 
@@ -31,7 +34,7 @@ public class CharacterStats : MonoBehaviour
             Die();
         }
 
-        
+
     }
 
     void Die()
@@ -50,7 +53,7 @@ public class CharacterStats : MonoBehaviour
         // Das Objekt nach einer kurzen Verzögerung (für die Animation) deaktivieren
         Invoke("DeactivateObject", 0.5f);
 
-        
+
     }
 
     void DeactivateObject()
