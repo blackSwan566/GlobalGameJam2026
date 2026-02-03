@@ -3,92 +3,52 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 public class ThirdPersonMovement : MonoBehaviour
 {
-    [Header("References")]
-    public Transform cameraTransform; // leave empty to use Camera.main at Start
-
     [Header("Movement")]
-    public float walkSpeed = 4f;
-    public float runSpeed = 7f;
-    public bool enableSprint = true;
+    [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private float gravity = -9.81f;
 
-    [Header("Rotation & Smoothing")]
-    public float rotationSmoothTime = 0.12f;
-    public float speedSmoothTime = 0.1f;
+    private CharacterController controller;
+    private Vector3 velocity;
+    private Vector2 moveInput;
 
-    [Header("Jump / Gravity")]
-    public float jumpHeight = 1.5f;
-    public float gravity = -9.81f;
+    // 👉 Öffentliche Zustände für Animation
+    public bool IsMoving { get; private set; }
+    public Vector3 Velocity => velocity;
 
-    // private state
-    CharacterController controller;
-    float currentSpeed;
-    float speedVelocity;
-    float rotationVelocity;
-    float verticalVelocity;
-
-    void Start()
+    void Awake()
     {
         controller = GetComponent<CharacterController>();
-        if (cameraTransform == null && Camera.main != null)
-            cameraTransform = Camera.main.transform;
     }
 
     void Update()
     {
-        // Read raw input
-        Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        HandleMovement();
+        ApplyGravity();
+    }
 
-        // Disable backward movement (S): clamp vertical to >= 0
-        input.y = Mathf.Max(0f, input.y);
+    private void HandleMovement()
+    {
+        moveInput = new Vector2(
+            Input.GetAxisRaw("Horizontal"),
+            Input.GetAxisRaw("Vertical")
+        );
 
-        float inputMagnitude = Mathf.Clamp01(input.magnitude);
+        Vector3 move = new Vector3(moveInput.x, 0f, moveInput.y);
 
-        // Determine target speed (sprint if holding Left Shift and enabled)
-        bool sprint = enableSprint && Input.GetKey(KeyCode.LeftShift);
-        float targetSpeed = (sprint ? runSpeed : walkSpeed) * inputMagnitude;
+        // Lokale Bewegung (vorwärts = Z)
+        move = transform.TransformDirection(move);
 
-        // Smooth speed
-        currentSpeed = Mathf.SmoothDamp(currentSpeed, targetSpeed, ref speedVelocity, speedSmoothTime);
+        controller.Move(move * moveSpeed * Time.deltaTime);
 
-        // Calculate movement direction relative to camera (or world if camera missing)
-        Vector3 moveDir;
-        if (inputMagnitude > 0.01f)
-        {
-            // angle based on input and camera yaw
-            float targetAngle = Mathf.Atan2(input.x, input.y) * Mathf.Rad2Deg;
-            float cameraYaw = (cameraTransform != null) ? cameraTransform.eulerAngles.y : 0f;
-            float desiredAngle = targetAngle + cameraYaw;
+        IsMoving = moveInput.sqrMagnitude > 0.01f;
+    }
 
-            // Smooth rotation
-            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, desiredAngle, ref rotationVelocity, rotationSmoothTime);
-            transform.rotation = Quaternion.Euler(0f, angle, 0f);
+    private void ApplyGravity()
+    {
+        if (controller.isGrounded && velocity.y < 0f)
+            velocity.y = -2f; // hält den Controller am Boden
 
-            // Move forward in the rotated direction
-            moveDir = Quaternion.Euler(0f, desiredAngle, 0f) * Vector3.forward;
-        }
-        else
-        {
-            moveDir = Vector3.zero;
-        }
-
-        // Grounded handling & gravity
-        if (controller.isGrounded)
-        {
-            // small negative to keep controller grounded
-            if (verticalVelocity < 0f) verticalVelocity = -2f;
-
-            // Jump
-            if (Input.GetButtonDown("Jump"))
-            {
-                verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * gravity);
-            }
-        }
-
-        // Apply gravity
-        verticalVelocity += gravity * Time.deltaTime;
-
-        // Compose final velocity and move
-        Vector3 velocity = moveDir.normalized * currentSpeed + Vector3.up * verticalVelocity;
+        velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
     }
 }
