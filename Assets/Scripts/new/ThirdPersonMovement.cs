@@ -5,50 +5,128 @@ public class ThirdPersonMovement : MonoBehaviour
 {
     [Header("Movement")]
     [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private float backSpeedMultiplier = 0.5f; // backing is moveSpeed * this
     [SerializeField] private float gravity = -9.81f;
+    [SerializeField] private float rotationSpeed = 10f; // higher = snappier rotation
+
+    [Header("References")]
+    [SerializeField] private Transform cameraTransform; // optional, for camera-relative movement
+    [SerializeField] private Animator animator; // optional, assign your Animator
+
+    [Header("Animator Parameters")]
+    [SerializeField] private string speedParam = "Speed";      // float 0..1 for blend tree
+    [SerializeField] private string isMovingParam = "IsMoving";// bool
+    [SerializeField] private string isBackingParam = "IsBacking";// bool for backward animation
 
     private CharacterController controller;
     private Vector3 velocity;
     private Vector2 moveInput;
 
-    // 👉 Öffentliche Zustände für Animation
+    // public states for animation/other systems
     public bool IsMoving { get; private set; }
+    public bool IsBacking { get; private set; }
     public Vector3 Velocity => velocity;
+
+    // animator hashes for performance
+    private int speedHash;
+    private int isMovingHash;
+    private int isBackingHash;
 
     void Awake()
     {
         controller = GetComponent<CharacterController>();
+        if (cameraTransform == null && Camera.main != null)
+            cameraTransform = Camera.main.transform;
+
+        if (animator == null)
+            animator = GetComponent<Animator>();
+
+        speedHash = Animator.StringToHash(speedParam);
+        isMovingHash = Animator.StringToHash(isMovingParam);
+        isBackingHash = Animator.StringToHash(isBackingParam);
     }
 
     void Update()
     {
         HandleMovement();
         ApplyGravity();
+        UpdateAnimator();
     }
 
     private void HandleMovement()
     {
-        moveInput = new Vector2(
-            Input.GetAxisRaw("Horizontal"),
-            Input.GetAxisRaw("Vertical")
-        );
+        // read raw inputs
+        moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
-        Vector3 move = new Vector3(moveInput.x, 0f, moveInput.y);
+        // compute camera-relative movement (ignore camera pitch)
+        Vector3 forward = (cameraTransform != null) ? Vector3.Scale(cameraTransform.forward, new Vector3(1, 0, 1)).normalized : Vector3.forward;
+        Vector3 right = (cameraTransform != null) ? cameraTransform.right : Vector3.right;
 
-        // Lokale Bewegung (vorwärts = Z)
-        move = transform.TransformDirection(move);
+        Vector3 desiredMove = right * moveInput.x + forward * moveInput.y;
+        float inputMagnitude = desiredMove.magnitude;
 
-        controller.Move(move * moveSpeed * Time.deltaTime);
+        IsMoving = inputMagnitude > 0.01f;
 
-        IsMoving = moveInput.sqrMagnitude > 0.01f;
+        // Determine backing (pressing S / negative vertical input relative to camera-forward)
+        IsBacking = Input.GetAxisRaw("Vertical") < -0.1f && Mathf.Abs(Input.GetAxisRaw("Vertical")) > Mathf.Abs(Input.GetAxisRaw("Horizontal"));
+
+        // Rotation:
+        // - If backing: do not rotate toward movement, keep facing current forward (so backpedal animation works)
+        // - Otherwise if moving: rotate to face movement direction (so lateral movement turns the character)
+        if (IsMoving && !IsBacking)
+        {
+            Vector3 flatMove = desiredMove;
+            flatMove.y = 0f;
+            if (flatMove.sqrMagnitude > 0.001f)
+            {
+                Quaternion targetRot = Quaternion.LookRotation(flatMove.normalized, Vector3.up);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, rotationSpeed * Time.deltaTime);
+            }
+        }
+
+        // Movement speed: use backing multiplier when backing
+        float effectiveSpeed = IsBacking ? moveSpeed * backSpeedMultiplier : moveSpeed;
+
+        Vector3 horizontalVelocity;
+        if (IsMoving)
+        {
+            // If backing, move along desiredMove but keep rotation unchanged so the character moves backward
+            horizontalVelocity = desiredMove.normalized * effectiveSpeed;
+        }
+        else
+        {
+            horizontalVelocity = Vector3.zero;
+        }
+
+        // preserve existing vertical velocity (gravity)
+        Vector3 move = horizontalVelocity + Vector3.up * velocity.y;
+        controller.Move(move * Time.deltaTime);
+
+        // store horizontal velocity for external use (remove vertical)
+        velocity.x = horizontalVelocity.x;
+        velocity.z = horizontalVelocity.z;
     }
 
     private void ApplyGravity()
     {
         if (controller.isGrounded && velocity.y < 0f)
-            velocity.y = -2f; // hält den Controller am Boden
+            velocity.y = -2f; // small downward force to keep grounded
 
         velocity.y += gravity * Time.deltaTime;
-        controller.Move(velocity * Time.deltaTime);
+        // vertical is applied in HandleMovement during controller.Move
+    }
+
+    private void UpdateAnimator()
+    {
+        if (animator == null) return;
+
+        // normalized speed based on moveSpeed (0..1). Use the absolute horizontal speed to drive animations.
+        float horizontalSpeed = new Vector2(velocity.x, velocity.z).magnitude;
+        // normalize relative to moveSpeed (not backing speed) so animator blend tree still maps consistently.
+        float normalized = (moveSpeed > 0f) ? Mathf.Clamp01(horizontalSpeed / moveSpeed) : 0f;
+
+        animator.SetFloat(speedHash, normalized);
+        animator.SetBool(isMovingHash, IsMoving);
+        animator.SetBool(isBackingHash, IsBacking);
     }
 }
