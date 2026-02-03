@@ -7,6 +7,6 @@ public class PlayerAnimation : MonoBehaviour
 
     void Update()
     {
-        animator.SetBool("IsRunning", playerController.IsMoving);
+        animator.SetBool("IsMoving", playerController.IsMoving);
     }
 }
