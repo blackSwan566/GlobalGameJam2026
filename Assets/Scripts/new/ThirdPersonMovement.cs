@@ -14,9 +14,9 @@ public class ThirdPersonMovement : MonoBehaviour
     [SerializeField] private Animator animator; // optional, assign your Animator
 
     [Header("Animator Parameters")]
-    [SerializeField] private string speedParam = "Speed";      // float 0..1 for blend tree
-    [SerializeField] private string isMovingParam = "IsMoving";// bool
-    [SerializeField] private string isBackingParam = "IsBacking";// bool for backward animation
+    [SerializeField] private string speedParam = "Speed";       // float 0..1 for blend tree
+    [SerializeField] private string isMovingParam = "IsMoving"; // bool
+    [SerializeField] private string isBackingParam = "IsBacking"; // bool for backward animation
 
     private CharacterController controller;
     private Vector3 velocity;
@@ -31,6 +31,9 @@ public class ThirdPersonMovement : MonoBehaviour
     private int speedHash;
     private int isMovingHash;
     private int isBackingHash;
+
+    // Allows external scripts to temporarily disable movement (e.g. during attack)
+    public bool MovementEnabled { get; set; } = true;
 
     void Awake()
     {
@@ -48,8 +51,12 @@ public class ThirdPersonMovement : MonoBehaviour
 
     void Update()
     {
-        HandleMovement();
-        ApplyGravity();
+        if (MovementEnabled)
+            HandleMovement();
+        else
+            // still apply gravity if movement disabled
+            ApplyGravityMovementOnly();
+
         UpdateAnimator();
     }
 
@@ -71,8 +78,6 @@ public class ThirdPersonMovement : MonoBehaviour
         IsBacking = Input.GetAxisRaw("Vertical") < -0.1f && Mathf.Abs(Input.GetAxisRaw("Vertical")) > Mathf.Abs(Input.GetAxisRaw("Horizontal"));
 
         // Rotation:
-        // - If backing: do not rotate toward movement, keep facing current forward (so backpedal animation works)
-        // - Otherwise if moving: rotate to face movement direction (so lateral movement turns the character)
         if (IsMoving && !IsBacking)
         {
             Vector3 flatMove = desiredMove;
@@ -90,7 +95,6 @@ public class ThirdPersonMovement : MonoBehaviour
         Vector3 horizontalVelocity;
         if (IsMoving)
         {
-            // If backing, move along desiredMove but keep rotation unchanged so the character moves backward
             horizontalVelocity = desiredMove.normalized * effectiveSpeed;
         }
         else
@@ -98,31 +102,41 @@ public class ThirdPersonMovement : MonoBehaviour
             horizontalVelocity = Vector3.zero;
         }
 
-        // preserve existing vertical velocity (gravity)
+        // preserve vertical velocity (gravity)
         Vector3 move = horizontalVelocity + Vector3.up * velocity.y;
         controller.Move(move * Time.deltaTime);
 
-        // store horizontal velocity for external use (remove vertical)
+        // store horizontal velocity for external use
         velocity.x = horizontalVelocity.x;
         velocity.z = horizontalVelocity.z;
+
+        // gravity accumulation handled below
+        ApplyGravity();
+    }
+
+    // Apply gravity but don't move horizontally (used when movement is disabled)
+    private void ApplyGravityMovementOnly()
+    {
+        if (controller.isGrounded && velocity.y < 0f)
+            velocity.y = -2f;
+
+        velocity.y += gravity * Time.deltaTime;
+        controller.Move(Vector3.up * velocity.y * Time.deltaTime);
     }
 
     private void ApplyGravity()
     {
         if (controller.isGrounded && velocity.y < 0f)
-            velocity.y = -2f; // small downward force to keep grounded
+            velocity.y = -2f;
 
         velocity.y += gravity * Time.deltaTime;
-        // vertical is applied in HandleMovement during controller.Move
     }
 
     private void UpdateAnimator()
     {
         if (animator == null) return;
 
-        // normalized speed based on moveSpeed (0..1). Use the absolute horizontal speed to drive animations.
         float horizontalSpeed = new Vector2(velocity.x, velocity.z).magnitude;
-        // normalize relative to moveSpeed (not backing speed) so animator blend tree still maps consistently.
         float normalized = (moveSpeed > 0f) ? Mathf.Clamp01(horizontalSpeed / moveSpeed) : 0f;
 
         animator.SetFloat(speedHash, normalized);
