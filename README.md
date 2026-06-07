@@ -1,0 +1,1 @@
+This is a 3D game focused on the design experience, which we developed as part of the global "GameJam2026" competition. Since we only had a day and a half to build it, it may have some flaws. Nevertheless, we really enjoyed working with Unity and to be part of the challange.
